@@ -16,7 +16,7 @@ class Bridge
             $data = $_POST;
         }
 
-        $data = serialize($data);
+        $data = json_encode($data);
 
         $file = fopen(__DIR__ . '/log.txt', 'a+');
 
