@@ -149,7 +149,7 @@ final class WebhookController
     {
         $additionalParams = [];
 
-        if (! empty($conversation) && ! is_array($conversation)) {
+        if (is_array($conversation)) {
             $additionalParams['message']   = $message;
             $additionalParams['sessionId'] = $conversation['conversation_token'];
         }
