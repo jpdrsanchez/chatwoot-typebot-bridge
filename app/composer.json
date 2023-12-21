@@ -1,23 +1,24 @@
 {
-    "name": "studio/bridge",
-    "description": "A bridge to integrate typebot into chatwoot application",
-    "type": "project",
-    "autoload": {
-        "psr-4": {
-            "Studio\\Bridge\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "jpdrsanchez"
-        }
-    ],
-    "require": {
-        "vlucas/phpdotenv": "^5.6",
-        "slim/slim": "4.*",
-        "slim/psr7": "^1.6"
-    },
-    "require-dev": {
-        "squizlabs/php_codesniffer": "^3.8"
+  "name": "studio/bridge",
+  "description": "A bridge to integrate typebot into chatwoot application",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Studio\\Bridge\\": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "jpdrsanchez"
+    }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^5.6",
+    "slim/slim": "4.*",
+    "slim/psr7": "^1.6",
+    "ext-pdo": "*"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.8"
+  }
 }

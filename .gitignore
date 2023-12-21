@@ -1,4 +1,5 @@
 vendor/
 .idea/
 .env
-log.txt
+logs.txt
+db.sqlite
