@@ -64,7 +64,7 @@ final class WebhookController
             Logger::log("Conversation found in database id: {$conversation['id']}");
         }
 
-        if ($conversation['ended'] === 'true') {
+        if (! empty($conversation) && $conversation['ended'] === 'true') {
             Logger::log("Conversation is finalized");
 
             return $response->withStatus(204);
@@ -85,8 +85,8 @@ final class WebhookController
         $typebot_conversation_token = $typebot_response?->sessionId;
 
         if (! empty($conversation['conversation_token']) &&
-            empty($typebot_conversation_token) &&
-            $typebot_conversation_token !== $conversation['conversation_token']
+             empty($typebot_conversation_token) &&
+             $typebot_conversation_token !== $conversation['conversation_token']
         ) {
             Logger::log("Finalizing Conversation");
 
@@ -134,9 +134,6 @@ final class WebhookController
             Logger::log("Conversation stored in database successfully");
             Logger::log("Stored Conversation ID {$this->database->lastInsertId()}");
         }
-
-        unset($query);
-        unset($statement);
 
         $message = RichTextReader::parseToString($typebot_response->messages);
 
