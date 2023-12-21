@@ -108,7 +108,7 @@ final class WebhookController
             $conversation = [
                 'account_id'         => $this->database->quote($account_id),
                 'conversation_id'    => $this->database->quote($conversation_id),
-                'conversation_token' => $this->database->quote($typebot_conversation_token),
+                'conversation_token' => $typebot_conversation_token,
                 'ended'              => 'false'
             ];
             $query        =
