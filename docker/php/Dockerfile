@@ -1,10 +1,6 @@
-FROM php:8.2-apache
+FROM php:8.2-fpm
 
-RUN chown -R www-data:www-data /var/www/html
-
-COPY app/ /var/www/html
-
-WORKDIR /var/www/html
+WORKDIR /var/www/app
 
 RUN apt-get update && apt-get install -y \
     git \
