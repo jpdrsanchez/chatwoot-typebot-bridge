@@ -11,7 +11,7 @@ class Database
     public function __construct()
     {
         $this->db = new PDO('sqlite:../database/db.sqlite');
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public function init(): void

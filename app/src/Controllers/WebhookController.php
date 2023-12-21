@@ -64,7 +64,7 @@ final class WebhookController
             Logger::log("Conversation found in database id: {$conversation['id']}");
         }
 
-        if (! empty($conversation) && $conversation['ended'] === 'true') {
+        if (! empty($conversation['ended']) && $conversation['ended'] === 'true') {
             Logger::log("Conversation is finalized");
 
             return $response->withStatus(204);

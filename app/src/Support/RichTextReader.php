@@ -41,12 +41,16 @@ class RichTextReader
             $finalText .= array_reduce(
                 $block->children,
                 function ($carry, $item) {
-                    if ($item?->bold) {
+                    if (! $item?->text) {
+                        return $carry;
+                    }
+
+                    if (! empty($item->bold)) {
                         $carry .= "**$item->text**";
-                    } elseif ($item?->italic) {
+                    } elseif (! empty($item->italic)) {
                         $carry .= "*$item->text*";
                     } else {
-                        $carry .= "$item";
+                        $carry .= "$item?->text";
                     }
 
                     return $carry;
