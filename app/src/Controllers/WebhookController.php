@@ -85,8 +85,8 @@ final class WebhookController
         $typebot_conversation_token = $typebot_response?->sessionId;
 
         if (! empty($conversation['conversation_token']) &&
-             empty($typebot_conversation_token) &&
-             $typebot_conversation_token !== $conversation['conversation_token']
+            ! empty($typebot_conversation_token) &&
+            $typebot_conversation_token !== $conversation['conversation_token']
         ) {
             Logger::log("Finalizing Conversation");
 
