@@ -51,7 +51,7 @@ final class WebhookController
         Logger::log("Account ID: $account_id");
 
         $sanitized_conversation_id = $this->database->quote($conversation_id);
-        $query                     = "SELECT id FROM `conversations` WHERE `conversation_id` = :conversation_id";
+        $query                     = "SELECT * FROM `conversations` WHERE `conversation_id` = :conversation_id";
         $statement                 = $this->database->prepare($query);
         $statement->bindParam(':conversation_id', $sanitized_conversation_id);
         $statement->execute();
@@ -101,6 +101,10 @@ final class WebhookController
         }
 
         if (! $conversation) {
+            unset($conversation);
+            unset($query);
+            unset($statement);
+
             $conversation = [
                 'account_id'         => $this->database->quote($account_id),
                 'conversation_id'    => $this->database->quote($conversation_id),
@@ -149,7 +153,9 @@ final class WebhookController
     {
         $additionalParams = [];
 
-        if (is_array($conversation)) {
+        Logger::log("Conversation Body: " . json_encode($conversation));
+
+        if (is_array($conversation) && ! empty($conversation['conversation_token'])) {
             $additionalParams['message']   = $message;
             $additionalParams['sessionId'] = $conversation['conversation_token'];
         }
@@ -160,6 +166,8 @@ final class WebhookController
                 'typebot' => $_ENV['TYPEBOT_ID']
             ]
         ];
+
+        Logger::log("Body sent to typebot: " . json_encode($content));
 
         $options = [
             'http' => [
