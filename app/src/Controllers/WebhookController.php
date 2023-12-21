@@ -87,7 +87,9 @@ final class WebhookController
     {
         $url  = "{$_ENV['CHATWOOT_BASE_URL']}/api/v1/accounts/$account/conversations/$conversation/messages";
         $data = [
-            'content' => $message
+            'content'      => $message,
+            'message_type' => 'outgoing',
+            'private'      => true
         ];
 
         $options = [
