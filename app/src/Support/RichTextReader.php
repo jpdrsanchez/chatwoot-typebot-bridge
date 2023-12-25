@@ -23,6 +23,10 @@ class RichTextReader
             if ($message?->content?->richText) {
                 $finalText .= self::formatRichText($message->content->richText);
             }
+
+            if ($message?->content?->url) {
+                $finalText .= "![Image]({$message->content->url})" . PHP_EOL;
+            }
         }
 
         return $finalText;
