@@ -15,7 +15,7 @@ final class Logger
         if ($_ENV['LOG'] !== 'true') {
             return;
         }
-        
+
         $file = fopen(self::LOG_FILE, 'a+');
         if (! $file) {
             return;

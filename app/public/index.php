@@ -11,7 +11,7 @@ $dotenv->safeLoad();
 
 $app = AppFactory::create();
 
-$app->get('/webhook', [ WebhookController::class, 'index' ]);
+$app->post('/webhook', [ WebhookController::class, 'index' ]);
 
 $app->addErrorMiddleware(true, true, true);
 
