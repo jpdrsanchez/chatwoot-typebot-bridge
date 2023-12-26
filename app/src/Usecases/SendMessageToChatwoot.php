@@ -29,13 +29,15 @@ class SendMessageToChatwoot
             'message_type' => 'outgoing',
             'private'      => true
         ];
-        $headers = "application/json\r\nAccept: application/json\r\napi_access_token: $chatwoot->chatwoot_bot_token";
+        $headers =
+            "Content-Type: application/json\r\n
+            Accept: application/json\r\n
+            api_access_token: $chatwoot->chatwoot_bot_token";
         $options = [
             'http' => [
                 'method'  => 'POST',
                 'content' => json_encode($body),
-                'header'  =>
-                    "Content-Type: $headers"
+                'header'  => $headers,
             ]
         ];
 

@@ -39,6 +39,14 @@ class ParseQueryParams
             return false;
         }
 
-        return (object) $output;
+        $output = (object) $output;
+
+        Logger::log("chatwoot_url: $output->chatwoot_url");
+        Logger::log("chatwoot_bot_token: $output->chatwoot_bot_token");
+        Logger::log("chatwoot_token: $output->chatwoot_token");
+        Logger::log("typebot_api_url: $output->typebot_api_url");
+        Logger::log("typebot_chat_id: $output->typebot_chat_id");
+
+        return $output;
     }
 }
