@@ -19,9 +19,9 @@ class SendMessageToTypebot
     {
         $additionalBodyParams = [];
 
-        if (! empty($conversation->sender?->custom_attributes?->typebot_token)) {
+        if (! empty($conversation->sender?->custom_attributes?->typebot_session)) {
             $additionalBodyParams['message']   = $conversation->content;
-            $additionalBodyParams['sessionId'] = $conversation->sender->custom_attributes->typebot_token;
+            $additionalBodyParams['sessionId'] = $conversation->sender->custom_attributes->typebot_session;
         }
 
         $body = json_encode([
