@@ -37,7 +37,7 @@ class SendMessageToChatwoot
         $options = [
             'http' => [
                 'method'  => 'POST',
-                'content' => json_encode($body),
+                'content' => $body,
                 'header'  => $headers,
             ]
         ];
