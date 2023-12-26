@@ -4,6 +4,7 @@ namespace Studio\Bridge\Usecases;
 
 use stdClass;
 use Studio\Bridge\Support\InputTextReader;
+use Studio\Bridge\Support\Logger;
 use Studio\Bridge\Support\RichTextReader;
 
 class GenerateChatwootMessage
@@ -27,6 +28,10 @@ class GenerateChatwootMessage
         if (! empty($typebot_response->input?->items) && is_array($typebot_response->input?->items)) {
             $inputMessage = InputTextReader::parseInputForChatwoot($typebot_response->input->items);
         }
+
+        Logger::log("Formatted message: $richTextMessage $inputMessage");
+        Logger::log("Rich text and image messages: $richTextMessage");
+        Logger::log("Rich text and image messages: $inputMessage");
 
         return "$richTextMessage $inputMessage";
     }
