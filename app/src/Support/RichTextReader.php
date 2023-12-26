@@ -53,6 +53,20 @@ class RichTextReader
                         $carry .= "**$item->text**";
                     } elseif (! empty($item->italic)) {
                         $carry .= "*$item->text*";
+                    } elseif (! empty($item->children)) {
+                        $carry .= array_reduce(
+                            $item->children,
+                            function ($carry, $item) {
+                                if (! $item?->text) {
+                                    return $carry;
+                                }
+
+                                $carry .= "$item?->text";
+
+                                return $carry;
+                            },
+                            "",
+                        );
                     } else {
                         $carry .= "$item?->text";
                     }

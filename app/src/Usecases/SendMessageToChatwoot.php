@@ -18,6 +18,8 @@ class SendMessageToChatwoot
      */
     public static function execute(string $message, stdClass $chatwoot, stdClass $query): void
     {
+        Logger::log("Message to be sent to chatwoot: $message");
+
         $chatwoot_url    = $query->chatwoot_url;
         $account_id      = $chatwoot->account?->id;
         $conversation_id = $chatwoot->conversation?->id;
