@@ -21,6 +21,7 @@ class SendMessageToChatwoot
         $chatwoot_url    = $query->chatwoot_url;
         $account_id      = $chatwoot->account?->id;
         $conversation_id = $chatwoot->conversation?->id;
+        $bot_token       = $chatwoot->chatwoot_bot_token;
 
         $url     =
             "$chatwoot_url/api/v1/accounts/$account_id/conversations/$conversation_id/messages";
@@ -30,9 +31,7 @@ class SendMessageToChatwoot
             'private'      => true
         ];
         $headers =
-            "Content-Type: application/json\r\n
-            Accept: application/json\r\n
-            api_access_token: $chatwoot->chatwoot_bot_token";
+            "Content-Type: application/json\r\nAccept: application/json\r\napi_access_token: $bot_token";
         $options = [
             'http' => [
                 'method'  => 'POST',

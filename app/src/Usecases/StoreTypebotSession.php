@@ -18,6 +18,8 @@ class StoreTypebotSession
      */
     public static function execute(string $session_id, stdClass $query, stdClass $message): void
     {
+        $token = $query->chatwoot_token;
+
         $body = json_encode([
             'custom_attributes' => [
                 'typebot_session' => $session_id,
@@ -30,7 +32,7 @@ class StoreTypebotSession
                 'method'  => 'PUT',
                 'content' => $body,
                 'header'  =>
-                    "application/json\r\nAccept: application/json\r\napi_access_token: {$query->chatwoot_token}"
+                    "Content-Type: application/json\r\nAccept: application/json\r\napi_access_token: $token"
             ]
         ];
         $context = stream_context_create($options);
