@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Gerar Link</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::after,
+        *::before {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 100%;
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: 'Fira Sans', sans-serif;
+            font-size: 1rem;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .main {
+            width: 100%;
+            height: 100vh;
+            overflow: auto;
+            display: flex;
+            padding: 60px 24px;
+            background: rgb(250, 250, 250);
+        }
+
+        .form {
+            padding: 48px 24px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 512px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            margin: auto;
+            display: grid;
+            gap: 48px;
+        }
+
+        .form h1 {
+            text-align: center;
+            font-size: 32px;
+            line-height: 1.4;
+        }
+
+        .label {
+            display: block;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .input {
+            width: 100%;
+            height: 44px;
+            outline: 0;
+            border-radius: 8px;
+            appearance: none;
+            display: block;
+            box-sizing: border-box;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            padding: 0 16px;
+            font-size: 18px;
+            font-family: 'Fira Sans', sans-serif;
+        }
+
+        .block {
+            display: grid;
+            gap: 16px;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .button {
+            display: block;
+            box-sizing: border-box;
+            text-align: center;
+            height: 44px;
+            border: none;
+            width: 100%;
+            background: #6366f1;
+            color: #fff;
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 600;
+            border-radius: 8px;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .break {
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+<main class="main">
+    <form class="form" data-form>
+        <h1>Gerar Link do Bot</h1>
+        <div class="block">
+            <div class="relative">
+                <label class="label" for="bridge_url">URL da Bridge</label>
+                <input class="input" id="bridge_url" name="bridge_url" type="text"/>
+            </div>
+            <div class="relative">
+                <label class="label" for="chatwoot_url">URL do Chatwoot</label>
+                <input class="input" id="chatwoot_url" name="chatwoot_url" type="text"/>
+            </div>
+            <div class="relative">
+                <label class="label" for="typebot_url">URL da API do Typebot</label>
+                <input class="input" id="typebot_url" name="typebot_url" type="text"/>
+            </div>
+            <div class="relative">
+                <label class="label" for="agent_bot_token">Token do Agent Bot (Chatwoot)</label>
+                <input class="input" id="agent_bot_token" name="agent_bot_token" type="text"/>
+            </div>
+            <div class="relative">
+                <label class="label" for="admin_token">Token do Admin (Chatwoot)</label>
+                <input class="input" id="admin_token" name="admin_token" type="text"/>
+            </div>
+            <div class="relative">
+                <label class="label" for="typebot_token">ID do BOT (Typebot)</label>
+                <input class="input" id="typebot_token" name="typebot_token" type="text"/>
+            </div>
+            <button class="button" type="submit">Gerar</button>
+        </div>
+        <div class="break" data-link>
+        </div>
+    </form>
+</main>
+<script>
+    const form = document.querySelector('[data-form]')
+    const wrapper = document.querySelector('[data-link]')
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const bridgeUrl = form.querySelector('#bridge_url')?.value ?? ''
+        const chatwootUrl = form.querySelector('#chatwoot_url')?.value ?? ''
+        const typebotUrl = form.querySelector('#typebot_url')?.value ?? ''
+        const agentBotToken = form.querySelector('#agent_bot_token')?.value ?? ''
+        const adminToken = form.querySelector('#admin_token')?.value ?? ''
+        const typebotToken = form.querySelector('#typebot_token')?.value ?? ''
+
+        wrapper.innerText =
+            `${bridgeUrl}?chatwoot_url=${chatwootUrl}&chatwoot_bot_token=${agentBotToken}&chatwoot_token=${adminToken}&typebot_api_url=${typebotUrl}&typebot_chat_id=${typebotToken}`;
+    })
+</script>
+</body>
+</html>
