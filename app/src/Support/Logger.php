@@ -12,7 +12,7 @@ final class Logger
 
     public static function log(string $message): void
     {
-        if ($_ENV['LOG'] !== 'true') {
+        if (empty($_ENV['LOG']) || $_ENV['LOG'] !== 'true') {
             return;
         }
 
