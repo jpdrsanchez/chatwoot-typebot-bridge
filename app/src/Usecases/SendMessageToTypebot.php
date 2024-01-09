@@ -17,19 +17,19 @@ class SendMessageToTypebot
      */
     public static function execute(stdClass $conversation, stdClass $query): false|stdClass
     {
-        $additionalBodyParams = [];
+        $typebot_url = rtrim(trim($query->typebot_api_url), '/');
+        $body        = [];
 
         if (! empty($conversation->sender?->custom_attributes?->typebot_session)) {
-            $additionalBodyParams['message']   = $conversation->content;
-            $additionalBodyParams['sessionId'] = $conversation->sender->custom_attributes->typebot_session;
+            $typebot_url .= '/sessions/' . $conversation->sender->custom_attributes->typebot_session . '/continueChat';
+            $body        = [
+                'message' => $conversation->content,
+            ];
+        } else {
+            $typebot_url .= '/typebots/' . $query->typebot_chat_id . '/startChat';
         }
 
-        $body = json_encode([
-            ...$additionalBodyParams,
-            'startParams' => [
-                'typebot' => $query->typebot_chat_id,
-            ]
-        ]);
+        $body = json_encode($body);
         Logger::log("Body to be sent to typebot: " . $body);
 
         $options = [
@@ -41,7 +41,7 @@ class SendMessageToTypebot
         ];
         $context = stream_context_create($options);
 
-        $response = file_get_contents($query->typebot_api_url, false, $context);
+        $response = file_get_contents($typebot_url, false, $context);
         if (empty($response)) {
             Logger::log("Invalid typebot response $response");
 

@@ -4,6 +4,7 @@ namespace Studio\Bridge\Controllers;
 
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Studio\Bridge\Usecases\FinalizeTypebotFlow;
 use Studio\Bridge\Usecases\GenerateChatwootMessage;
 use Studio\Bridge\Usecases\ParseChatwootResponse;
 use Studio\Bridge\Usecases\ParseQueryParams;
@@ -37,6 +38,8 @@ final class WebhookController
         $message = GenerateChatwootMessage::execute($typebot_response);
 
         SendMessageToChatwoot::execute($message, $chatwoot_provided_data, $query);
+
+        FinalizeTypebotFlow::execute($query, $chatwoot_provided_data);
 
         return $response->withStatus(204);
     }

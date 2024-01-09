@@ -7,11 +7,21 @@ use Studio\Bridge\Support\Logger;
 
 class FinalizeTypebotFlow
 {
-    public static function execute(string $token, stdClass $query, stdClass $message): void
+    /**
+     * Removes the typebot token in the chatwoot contact attributes.
+     *
+     * @param string $token
+     * @param stdClass $query
+     * @param stdClass $message
+     *
+     * @return void
+     */
+    public static function execute(stdClass $query, stdClass $message): void
     {
-        $body = json_encode([
+        $token = $query->chatwoot_token;
+        $body  = json_encode([
             'custom_attributes' => [
-                'statusbot' => 'atendido'
+                'typebot_session' => null,
             ]
         ]);
         Logger::log("Body to be sent to chatwoot for finalize flow: " . $body);
