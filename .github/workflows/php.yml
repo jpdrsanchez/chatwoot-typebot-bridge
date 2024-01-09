@@ -6,18 +6,13 @@ on:
   pull_request:
     branches: [ "master" ]
 
-permissions:
-  contents: read
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     
-    - name: Executando composer install para dependências do Wordpress
+    - name: Executando composer install para dependências da API
       uses: php-actions/composer@v5
       with:
         php_version: 8.2
