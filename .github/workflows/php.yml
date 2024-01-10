@@ -24,7 +24,7 @@ jobs:
     - name: Copiando arquivos do puglin  para ambiente de testes
       uses: burnett01/rsync-deployments@5.1
       with:
-         switches: --no-perms -O --exclude=.git/ --exclude=.env --merge="rsync-filter.txt" --exclude=node_modules --delete -Prltvz
+         switches: --no-perms -O --exclude=.git/ --exclude=.env --filter="rsync-filter.txt" --exclude=node_modules --delete -Prltvz
          path: ./app
          remote_path: /home/ubuntu/chatwoot-typebot-bridge-master/app
          remote_host: ${{ secrets.SSH_DEV_DEPLOY_HOST }}
