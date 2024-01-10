@@ -35,8 +35,7 @@ jobs:
     - name: Reinicia containeres
       uses: garygrossgarten/github-action-ssh@release
       with:
-        command: |
-          cd  /home/ubuntu/chatwoot-typebot-bridge-master/ && docker-compose up -d --force-recreate --build
+        command: cd  /home/ubuntu/chatwoot-typebot-bridge-master/ && docker-compose up -d --force-recreate --build
         host: ${{ secrets.SSH_DEV_DEPLOY_HOST }}
         username: ubuntu
         privateKey: ${{ secrets.SSH_DEV_DEPLOY_KEY }}
