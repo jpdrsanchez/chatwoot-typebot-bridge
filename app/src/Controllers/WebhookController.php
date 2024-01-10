@@ -28,7 +28,7 @@ final class WebhookController
 
         $typebot_response = SendMessageToTypebot::execute($chatwoot_provided_data, $query);
         if (! $typebot_response) {
-            FinalizeTypebotFlow::execute($query, $chatwoot_provided_data);
+//            FinalizeTypebotFlow::execute($query, $chatwoot_provided_data);
 
             return $response->withStatus(204);
         }
