@@ -11,10 +11,11 @@ class ParseChatwootResponse
      * Get the current provided chatwoot message and turns it into a stdClass or returns false if something is wrong.
      *
      * @param string $body
+     * @param stdClass $query
      *
      * @return false|stdClass
      */
-    public static function execute(string $body): false|stdClass
+    public static function execute(string $body, stdClass $query): false|stdClass
     {
         $data = json_decode($body);
         if (! is_array($data) && ! $data instanceof stdClass) {
@@ -46,6 +47,8 @@ class ParseChatwootResponse
 
         if ($data->sender?->custom_attributes?->statusbot === 'atendido') {
             Logger::log("Conversation already finalized");
+
+            FinalizeTypebotFlow::execute($query, $data);
 
             return false;
         }

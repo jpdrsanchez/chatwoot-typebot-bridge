@@ -10,7 +10,6 @@ class FinalizeTypebotFlow
     /**
      * Removes the typebot token in the chatwoot contact attributes.
      *
-     * @param string $token
      * @param stdClass $query
      * @param stdClass $message
      *
