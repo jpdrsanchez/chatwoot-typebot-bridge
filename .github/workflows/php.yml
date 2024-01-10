@@ -24,7 +24,7 @@ jobs:
     - name: Copiando arquivos do puglin  para ambiente de testes
       uses: burnett01/rsync-deployments@5.1
       with:
-         switches: --no-perms -O --exclude=.git/ --exclude=.env --exclude=node_modules --delete -Prltvz
+         switches: --no-perms -O --exclude=.git/ --exclude=.env --merge= "rsync-filter.txt"--exclude=node_modules --delete -Prltvz
          path: ./app
          remote_path: /home/ubuntu/chatwoot-typebot-bridge-master/app
          remote_host: ${{ secrets.SSH_DEV_DEPLOY_HOST }}
@@ -32,10 +32,11 @@ jobs:
          remote_user: ubuntu
          remote_key: ${{ secrets.SSH_DEV_DEPLOY_KEY }}
 
-    - name: Reinicia containeres
-      uses: garygrossgarten/github-action-ssh@release
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@v1.0.3
       with:
-        command: cd  /home/ubuntu/chatwoot-typebot-bridge-master/ && docker-compose up -d --force-recreate --build
         host: ${{ secrets.SSH_DEV_DEPLOY_HOST }}
         username: ubuntu
-        privateKey: ${{ secrets.SSH_DEV_DEPLOY_KEY }}
+        key: ${{ secrets.SSH_DEV_DEPLOY_KEY }}
+        port: 22
+        script: cd  /home/ubuntu/chatwoot-typebot-bridge-master/ && docker-compose up -d --force-recreate --build
