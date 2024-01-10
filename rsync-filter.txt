@@ -9,3 +9,4 @@
 - docker/*
 - composer*
 - docker-compose*
+- /app/composer.lock
