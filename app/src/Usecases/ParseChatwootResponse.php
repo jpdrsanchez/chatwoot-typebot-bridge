@@ -17,6 +17,8 @@ class ParseChatwootResponse
      */
     public static function execute(string $body, stdClass $query): false|stdClass
     {
+        Logger::log("Message body before validation: $body");
+
         $data = json_decode($body);
         if (! is_array($data) && ! $data instanceof stdClass) {
             Logger::log('Invalid JSON');
