@@ -20,7 +20,7 @@ final class WebhookController
             return $response->withStatus(204);
         }
 
-        $chatwoot_provided_data = ParseChatwootResponse::execute($request->getBody()->read(5000), $query);
+        $chatwoot_provided_data = ParseChatwootResponse::execute($request->getBody()->read(30000), $query);
         if (! $chatwoot_provided_data) {
             return $response->withStatus(204);
         }
