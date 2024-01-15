@@ -21,6 +21,7 @@ class FinalizeTypebotFlow
         $body  = json_encode([
             'custom_attributes' => [
                 'typebot_session' => null,
+                'statusbot'       => 'atendido'
             ]
         ]);
         Logger::log("Body to be sent to chatwoot for finalize flow: " . $body);

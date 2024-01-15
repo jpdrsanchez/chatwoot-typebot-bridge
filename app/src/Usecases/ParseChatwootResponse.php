@@ -26,8 +26,13 @@ class ParseChatwootResponse
             return false;
         }
 
+        UpdateChatwootConversationStatus::execute($query, $data);
+
         $message_type = $data->message_type;
         if ($message_type !== 'incoming') {
+            if ($message_type === 'outgoing' && $data->private === 'false') {
+                FinalizeTypebotFlow::execute($query, $data);
+            }
             Logger::log('Invalid message type');
 
             return false;
