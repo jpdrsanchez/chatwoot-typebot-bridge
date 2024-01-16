@@ -26,10 +26,11 @@ class FinalizeTypebotFlow {
 
 		$options = [
 			'http' => [
-				'method'  => 'PUT',
-				'content' => $body,
-				'header'  =>
-					"Content-Type: application/json\r\nAccept: application/json\r\napi_access_token: $token"
+				'method'        => 'PUT',
+				'content'       => $body,
+				'header'        =>
+					"Content-Type: application/json\r\nAccept: application/json\r\napi_access_token: $token",
+				'ignore_errors' => true
 			]
 		];
 		$context = stream_context_create( $options );
