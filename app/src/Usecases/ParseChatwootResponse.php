@@ -32,7 +32,8 @@ class ParseChatwootResponse
         if ($message_type !== 'incoming') {
             Logger::log('Message is not incoming');
             Logger::log("Message Type: $message_type");
-            Logger::log("Message is: $data->private");
+            Logger::log("Message is: {$data->sender->type}");
+            Logger::log($data->sender->type);
 
             if ($message_type === 'outgoing' && $data->private === 'false') {
                 FinalizeTypebotFlow::execute($query, $data);
