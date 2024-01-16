@@ -36,7 +36,7 @@ class FinalizeTypebotFlow {
 		$context = stream_context_create( $options );
 
 		$url =
-			"$query->chatwoot_url/api/v1/accounts/{$message->account?->id}/contacts/{$message->sender?->id}";
+			"$query->chatwoot_url/api/v1/accounts/{$message->account?->id}/contacts/{$message->conversation?->contact_inbox?->contact_id}";
 
 		Logger::log( "finalizing url $url" );
 
