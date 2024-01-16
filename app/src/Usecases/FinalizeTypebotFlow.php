@@ -15,7 +15,7 @@ class FinalizeTypebotFlow {
 	 * @return void
 	 */
 	public static function execute( stdClass $query, stdClass $message ): void {
-		$token = $query->chatwoot_bot_token;
+		$token = $query->chatwoot_token;
 		$body  = json_encode( [
 			'custom_attributes' => [
 				'typebot_session' => null,
