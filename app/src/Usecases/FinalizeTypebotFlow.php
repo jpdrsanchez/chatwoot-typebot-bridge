@@ -39,6 +39,8 @@ class FinalizeTypebotFlow
         $url =
             "$query->chatwoot_url/api/v1/accounts/{$message->account?->id}/contacts/{$message->sender?->id}";
 
+        Logger::log("finalizing url $url");
+
         $response =
             file_get_contents(
                 $url,
